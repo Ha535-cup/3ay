@@ -1736,7 +1736,17 @@
                 loginBtn.disabled = true;
                 loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الدخول...';
                 
-                const result = await database.loginAdmin(username, password);
+                // الكود الجديد (الحل)
+// 1. نتأكد أولاً هل المدخل هو إيميل كامل أم مجرد اسم؟
+let emailToUse = username;
+if (!username.includes('@')) {
+    // إذا لم يكتب @، نستخدم الدالة لتحويل الاسم إلى إيميل
+    emailToUse = database.usernameToEmail(username);
+}
+
+// 2. نرسل الإيميل الصحيح للتسجيل
+const result = await database.loginAdmin(emailToUse, password);
+
                 
                 if (result.success) {
                     usernameError.style.display = 'none';
@@ -1876,4 +1886,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
