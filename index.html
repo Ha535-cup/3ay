@@ -1165,6 +1165,12 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
+// إجبار فايربيس على استخدام طريقة اتصال متوافقة أكثر مع المتصفحات المحلية
+db.settings({
+  experimentalForceLongPolling: true,
+  merge: true
+});
+
 
         // ==================== دوال Firebase ====================
         
@@ -1887,3 +1893,4 @@ const result = await database.loginAdmin(emailToUse, password);
     </script>
 </body>
     </html>
+
