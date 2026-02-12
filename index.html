@@ -434,6 +434,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
         .question-item:hover {
@@ -450,6 +451,23 @@
 
         .question-item.answered {
             border-right: 5px solid var(--secondary);
+        }
+
+        .unread-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
         }
 
         .question-content {
@@ -478,6 +496,26 @@
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .question-meta .whatsapp-link {
+            color: #25D366;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid #25D366;
+        }
+
+        .question-meta .whatsapp-link:hover {
+            background: #25D366;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);
         }
 
         .question-status {
@@ -648,75 +686,105 @@
             text-align: right;
         }
 
-        .answer-section {
-            margin-top: 35px;
+        .replies-section {
+            margin-top: 30px;
+            border-top: 1px solid var(--gray-light);
+            padding-top: 25px;
         }
 
-        .answer-section label {
-            display: block;
-            color: var(--gray);
-            font-size: 14px;
+        .replies-title {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+
+        .reply-item {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-right: 3px solid var(--primary-light);
+        }
+
+        .reply-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 12px;
-            font-weight: 600;
-            text-align: right;
         }
 
-        .answer-section textarea {
-            width: 100%;
-            padding: 18px;
+        .reply-sender {
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reply-sender i {
+            color: var(--secondary);
+        }
+
+        .reply-time {
+            color: var(--gray);
+            font-size: 13px;
+        }
+
+        .reply-content {
+            color: var(--dark);
+            line-height: 1.8;
+            font-size: 15px;
+            white-space: pre-wrap;
+        }
+
+        .reply-form {
+            margin-top: 25px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .reply-input {
+            flex: 1;
+            padding: 15px;
             border: 2px solid var(--gray-light);
             border-radius: var(--border-radius);
-            font-size: 16px;
-            resize: vertical;
-            min-height: 180px;
+            font-size: 15px;
             transition: var(--transition);
-            background-color: #fdfdfd;
-            line-height: 1.7;
-            text-align: right;
         }
 
-        .answer-section textarea:focus {
+        .reply-input:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
-            background-color: white;
+        }
+
+        .reply-send-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: var(--border-radius);
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reply-send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(44, 90, 160, 0.3);
         }
 
         .modal-actions {
             display: flex;
             gap: 18px;
             margin-top: 35px;
-        }
-
-        .send-answer-btn {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
-            color: white;
-            border: none;
-            padding: 16px 35px;
-            border-radius: var(--border-radius);
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            flex: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 6px 15px rgba(0, 168, 150, 0.2);
-        }
-
-        .send-answer-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 168, 150, 0.25);
-        }
-
-        .send-answer-btn:disabled {
-            background: var(--gray-light);
-            color: var(--gray);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
         }
 
         .delete-btn {
@@ -881,21 +949,17 @@
                 align-items: flex-start;
                 padding: 20px;
             }
-            
             .admin-info {
                 width: 100%;
                 justify-content: space-between;
             }
-            
             .notifications-dropdown {
                 width: 320px;
                 right: -160px;
             }
-            
             .modal-actions {
                 flex-direction: column;
             }
-            
             .user-stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -905,33 +969,27 @@
             .stats-cards {
                 grid-template-columns: 1fr;
             }
-            
             .question-item {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 18px;
             }
-            
             .question-meta {
                 flex-wrap: wrap;
                 gap: 15px;
             }
-            
             .admin-info {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 15px;
             }
-            
             .notifications-dropdown {
                 width: 280px;
                 right: -140px;
             }
-            
             .user-stats-grid {
                 grid-template-columns: 1fr;
             }
-            
             .users-table th, 
             .users-table td {
                 padding: 15px 10px;
@@ -943,35 +1001,28 @@
             .login-card {
                 padding: 30px 20px;
             }
-            
             .login-card .logo {
                 font-size: 28px;
             }
-            
             .login-card h2 {
                 font-size: 22px;
             }
-            
             .pin-digit {
                 width: 50px;
                 height: 60px;
                 font-size: 24px;
             }
-            
             .navbar .logo {
                 font-size: 20px;
             }
-            
             .stat-card {
                 flex-direction: column;
                 text-align: center;
                 gap: 18px;
             }
-            
             .question-title {
                 font-size: 16px;
             }
-            
             .users-section h2 {
                 font-size: 22px;
             }
@@ -998,7 +1049,6 @@
                 </div>
                 <div class="error-message" id="pinError">رمز الدخول غير صحيح</div>
             </div>
-            
             <button class="login-btn" id="loginBtn">
                 <i class="fas fa-sign-in-alt"></i>
                 دخول
@@ -1018,8 +1068,7 @@
                 <div class="notifications-container" id="notificationsContainer">
                     <i class="fas fa-bell"></i>
                     <div class="notification-badge" id="notificationBadge" style="display: none;">0</div>
-                    <div class="notifications-dropdown" id="notificationsDropdown">
-                    </div>
+                    <div class="notifications-dropdown" id="notificationsDropdown"></div>
                 </div>
                 <button class="logout-btn" id="logoutBtn">
                     <i class="fas fa-sign-out-alt"></i>
@@ -1031,31 +1080,16 @@
         <div class="container">
             <div class="stats-cards">
                 <div class="stat-card">
-                    <div class="stat-icon pending">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3 id="pendingCount">0</h3>
-                        <p>أسئلة بانتظار الرد</p>
-                    </div>
+                    <div class="stat-icon pending"><i class="fas fa-clock"></i></div>
+                    <div class="stat-info"><h3 id="pendingCount">0</h3><p>أسئلة بانتظار الرد</p></div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon answered">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3 id="answeredCount">0</h3>
-                        <p>أسئلة تم الرد عليها</p>
-                    </div>
+                    <div class="stat-icon answered"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-info"><h3 id="answeredCount">0</h3><p>أسئلة تم الرد عليها</p></div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon total">
-                        <i class="fas fa-question-circle"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3 id="totalCount">0</h3>
-                        <p>إجمالي الأسئلة</p>
-                    </div>
+                    <div class="stat-icon total"><i class="fas fa-question-circle"></i></div>
+                    <div class="stat-info"><h3 id="totalCount">0</h3><p>إجمالي الأسئلة</p></div>
                 </div>
             </div>
 
@@ -1071,43 +1105,20 @@
 
             <div class="users-section">
                 <h2><i class="fas fa-users"></i> إحصائيات المستخدمين</h2>
-                
                 <div class="user-stats-card">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
                         <h3 style="color: var(--primary); font-size: 20px;">المستخدمون النشطون</h3>
-                        <button class="refresh-users-btn" id="refreshUsersBtn">
-                            <i class="fas fa-redo"></i>
-                            تحديث
-                        </button>
+                        <button class="refresh-users-btn" id="refreshUsersBtn"><i class="fas fa-redo"></i>تحديث</button>
                     </div>
-                    
                     <div class="user-stats-grid">
-                        <div class="user-stat-box">
-                            <div class="user-stat-value" id="totalUsersCount">0</div>
-                            <div class="user-stat-label">إجمالي المستخدمين</div>
-                        </div>
-                        <div class="user-stat-box">
-                            <div class="user-stat-value" id="activeUsersCount">0</div>
-                            <div class="user-stat-label">نشطون اليوم</div>
-                        </div>
-                        <div class="user-stat-box">
-                            <div class="user-stat-value" id="questionsPerUserAvg">0</div>
-                            <div class="user-stat-label">متوسط أسئلة/مستخدم</div>
-                        </div>
+                        <div class="user-stat-box"><div class="user-stat-value" id="totalUsersCount">0</div><div class="user-stat-label">إجمالي المستخدمين</div></div>
+                        <div class="user-stat-box"><div class="user-stat-value" id="activeUsersCount">0</div><div class="user-stat-label">نشطون اليوم</div></div>
+                        <div class="user-stat-box"><div class="user-stat-value" id="questionsPerUserAvg">0</div><div class="user-stat-label">متوسط أسئلة/مستخدم</div></div>
                     </div>
-                    
                     <div class="users-list-container">
                         <table class="users-table">
-                            <thead>
-                                <tr>
-                                    <th>اسم المستخدم</th>
-                                    <th style="text-align: center;">رقم الواتساب</th>
-                                    <th style="text-align: center;">عدد الأسئلة</th>
-                                    <th style="text-align: center;">آخر نشاط</th>
-                                </tr>
-                            </thead>
-                            <tbody id="usersTableBody">
-                            </tbody>
+                            <thead><tr><th>اسم المستخدم</th><th style="text-align: center;">رقم الواتساب</th><th style="text-align: center;">عدد الأسئلة</th><th style="text-align: center;">آخر نشاط</th></tr></thead>
+                            <tbody id="usersTableBody"></tbody>
                         </table>
                     </div>
                 </div>
@@ -1115,57 +1126,35 @@
         </div>
     </div>
 
-    <!-- نافذة عرض السؤال -->
+    <!-- نافذة عرض السؤال والمحادثة -->
     <div class="question-modal" id="questionModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3><i class="fas fa-question-circle"></i>عرض السؤال</h3>
+                <h3><i class="fas fa-question-circle"></i>عرض السؤال والمحادثة</h3>
                 <button class="close-modal" id="closeModal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="question-details">
-                    <div class="detail-group">
-                        <label>اسم الطالب</label>
-                        <div class="value" id="modalName">-</div>
-                    </div>
-                    <div class="detail-group">
-                        <label>المادة الدراسية</label>
-                        <div class="value" id="modalSubject">-</div>
-                    </div>
-                    <div class="detail-group">
-                        <label>رقم الواتساب</label>
-                        <div class="value" id="modalWhatsapp">-</div>
-                    </div>
-                    <div class="detail-group">
-                        <label>تاريخ الإرسال</label>
-                        <div class="value" id="modalDate">-</div>
-                    </div>
+                    <div class="detail-group"><label>اسم الطالب</label><div class="value" id="modalName">-</div></div>
+                    <div class="detail-group"><label>رقم الواتساب</label><div class="value" id="modalWhatsapp">-</div></div>
+                    <div class="detail-group"><label>حالة السؤال</label><div class="value" id="modalStatus">-</div></div>
+                    <div class="detail-group"><label>تاريخ الإرسال</label><div class="value" id="modalDate">-</div></div>
                 </div>
+                <div class="question-text"><label>عنوان السؤال</label><div class="value" id="modalTitle">-</div></div>
+                <div class="question-text"><label>نص السؤال</label><div class="value" id="modalQuestion">-</div></div>
 
-                <div class="question-text">
-                    <label>عنوان السؤال</label>
-                    <div class="value" id="modalTitle">-</div>
-                </div>
-
-                <div class="question-text">
-                    <label>نص السؤال</label>
-                    <div class="value" id="modalQuestion">-</div>
-                </div>
-
-                <div class="answer-section">
-                    <label for="answerText">الإجابة</label>
-                    <textarea id="answerText" placeholder="اكتب الإجابة هنا... يمكنك استخدام تنسيق نصي لتنظيم الإجابة"></textarea>
+                <!-- الردود -->
+                <div class="replies-section">
+                    <div class="replies-title"><i class="fas fa-comments"></i> المحادثة</div>
+                    <div id="repliesContainer"></div>
+                    <div class="reply-form">
+                        <input type="text" class="reply-input" id="replyInput" placeholder="اكتب ردك هنا...">
+                        <button class="reply-send-btn" id="sendReplyBtn"><i class="fas fa-paper-plane"></i> إرسال</button>
+                    </div>
                 </div>
 
                 <div class="modal-actions">
-                    <button class="send-answer-btn" id="sendAnswerBtn">
-                        <i class="fas fa-paper-plane"></i>
-                        إرسال الإجابة
-                    </button>
-                    <button class="delete-btn" id="deleteQuestionBtn">
-                        <i class="fas fa-trash"></i>
-                        حذف السؤال
-                    </button>
+                    <button class="delete-btn" id="deleteQuestionBtn"><i class="fas fa-trash"></i> حذف السؤال</button>
                 </div>
             </div>
         </div>
@@ -1174,417 +1163,357 @@
     <script>
         // ==================== رمز الدخول الثابت ====================
         const ADMIN_PIN = "1234";
-        
-        // ==================== تهيئة Firebase للبيانات فقط ====================
+
+        // ==================== إعداد Firebase ====================
         const firebaseConfig = {
-  apiKey: "AIzaSyDbM7Ctn_EKQBauI3aMbV3lcrkni_qFtnU",
-  authDomain: "eyn-4a521.firebaseapp.com",
-  projectId: "eyn-4a521",
-  storageBucket: "eyn-4a521.firebasestorage.app",
-  messagingSenderId: "842348200480",
-  appId: "1:842348200480:web:9c75834517331da4e2f245",
-  measurementId: "G-SS74B2WPX2"
-};
+            apiKey: "AIzaSyDbM7Ctn_EKQBauI3aMbV3lcrkni_qFtnU",
+            authDomain: "eyn-4a521.firebaseapp.com",
+            projectId: "eyn-4a521",
+            storageBucket: "eyn-4a521.firebasestorage.app",
+            messagingSenderId: "842348200480",
+            appId: "1:842348200480:web:9c75834517331da4e2f245",
+            measurementId: "G-SS74B2WPX2"
+        };
 
-
-        // محاولة تهيئة Firebase بشكل آمن
-        let firebaseApp;
-        let db;
-        
+        let firebaseApp, db;
         try {
             firebaseApp = firebase.initializeApp(firebaseConfig);
             db = firebase.firestore();
-            console.log("✅ Firebase تم تهيئته بنجاح للبيانات");
+            console.log("✅ Firebase initialized");
         } catch (error) {
-            console.warn("⚠️ هناك مشكلة في Firebase:", error);
-            // سنستخدم بيانات وهمية للاختبار
+            console.warn("⚠️ Firebase error:", error);
         }
 
-        // ==================== دوال Firebase للبيانات ====================
-        class FirebaseDatabase {
+        // ==================== نظام المشرف ====================
+        class AdminSystem {
             constructor() {
                 this.db = db;
-                this.currentUser = null;
+                this.currentQuestionId = null;
+                this.unsubscribeQuestions = null;
+                this.unsubscribeNotifications = null;
             }
-            
-            async getQuestions() {
-                if (!this.db) {
-                    console.log("⚠️ Firebase غير متصل - عرض بيانات وهمية");
-                    // بيانات وهمية للاختبار
-                    return [
-                        {
-                            id: "1",
-                            title: "سؤال في الرياضيات",
-                            question: "كيف أحل هذه المسألة؟",
-                            userName: "محمد أحمد",
-                            subject: "الرياضيات",
-                            status: "pending",
-                            createdAt: new Date().toISOString()
-                        },
-                        {
-                            id: "2",
-                            title: "استفسار في الفيزياء",
-                            question: "ما هي قوانين نيوتن؟",
-                            userName: "فاطمة خالد",
-                            subject: "الفيزياء",
-                            status: "answered",
-                            createdAt: new Date(Date.now() - 86400000).toISOString()
-                        }
-                    ];
-                }
-                
-                try {
-                    const snapshot = await this.db.collection('questions')
-                        .orderBy('createdAt', 'desc')
-                        .get();
-                    
-                    return snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        ...doc.data()
-                    }));
-                } catch (error) {
-                    console.error('خطأ في جلب الأسئلة:', error);
-                    return [];
-                }
+
+            createWhatsappLink(phoneNumber) {
+                if (!phoneNumber) return '#';
+                let clean = phoneNumber.toString().replace(/\D/g, '');
+                if (clean.length === 8) clean = '222' + clean;
+                if (clean.length === 10 && clean.startsWith('0')) clean = '222' + clean.substring(1);
+                return `https://wa.me/${clean}`;
             }
-            
+
+            async getQuestions() { /* مستمع مباشر أفضل */ }
+
             async getQuestionById(questionId) {
-                if (!this.db) {
-                    // بيانات وهمية للاختبار
-                    return {
-                        id: questionId,
-                        title: "سؤال تجريبي",
-                        question: "هذا سؤال تجريبي للاختبار",
-                        userName: "طالب تجريبي",
-                        subject: "رياضيات",
-                        status: "pending",
-                        createdAt: new Date().toISOString(),
-                        userPhone: "+966500000000"
-                    };
-                }
-                
-                try {
-                    const doc = await this.db.collection('questions').doc(questionId).get();
-                    if (doc.exists) {
-                        return { id: doc.id, ...doc.data() };
-                    }
-                    return null;
-                } catch (error) {
-                    console.error('خطأ في جلب السؤال:', error);
-                    return null;
-                }
+                const doc = await this.db.collection('questions').doc(questionId).get();
+                return doc.exists ? { id: doc.id, ...doc.data() } : null;
             }
-            
-            async updateQuestion(questionId, updates) {
-                if (!this.db) {
-                    console.log("⚠️ Firebase غير متصل - تم حفظ البيانات محلياً");
-                    return { success: true, message: "تم الحفظ محلياً (Firebase غير متصل)" };
-                }
-                
-                try {
-                    const questionRef = this.db.collection('questions').doc(questionId);
-                    
-                    if (updates.status === 'answered' && updates.answer) {
-                        updates.answeredAt = new Date().toISOString();
-                    }
-                    
-                    await questionRef.update(updates);
-                    return { success: true };
-                } catch (error) {
-                    console.error('خطأ في تحديث السؤال:', error);
-                    return { success: false, message: error.message };
-                }
-            }
-            
+
             async deleteQuestion(questionId) {
-                if (!this.db) {
-                    console.log("⚠️ Firebase غير متصل - تم حذف البيانات محلياً");
-                    return { success: true, message: "تم الحذف محلياً (Firebase غير متصل)" };
-                }
-                
                 try {
                     await this.db.collection('questions').doc(questionId).delete();
                     return { success: true };
                 } catch (error) {
-                    console.error('خطأ في حذف السؤال:', error);
                     return { success: false, message: error.message };
                 }
             }
-            
-            async getNotifications() {
-                if (!this.db) {
-                    // بيانات وهمية للاختبار
-                    return [];
+
+            async addReply(questionId, content) {
+                try {
+                    if (!content.trim()) throw new Error('الرد فارغ');
+                    const questionRef = this.db.collection('questions').doc(questionId);
+                    const questionDoc = await questionRef.get();
+                    if (!questionDoc.exists) throw new Error('السؤال غير موجود');
+
+                    const reply = {
+                        id: `reply_${Date.now()}_${Math.random()}`,
+                        senderId: 'admin',
+                        senderName: 'المشرف',
+                        senderRole: 'admin',
+                        content: content.trim(),
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                        readByAdmin: true,
+                        readByStudent: false
+                    };
+
+                    await questionRef.update({
+                        replies: firebase.firestore.FieldValue.arrayUnion(reply),
+                        status: 'answered',
+                        answeredAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+
+                    const question = questionDoc.data();
+                    await this.db.collection('notifications').add({
+                        studentId: question.studentId,
+                        studentName: question.studentName,
+                        questionId: questionId,
+                        title: 'رد من المشرف',
+                        message: `تم الرد على سؤالك`,
+                        read: false,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                        type: 'student'
+                    });
+
+                    return { success: true };
+                } catch (error) {
+                    return { success: false, message: error.message };
                 }
-                
+            }
+
+            async markRepliesAsReadByAdmin(questionId) {
+                try {
+                    const questionRef = this.db.collection('questions').doc(questionId);
+                    const questionDoc = await questionRef.get();
+                    if (!questionDoc.exists) return;
+                    const question = questionDoc.data();
+
+                    const updatedReplies = (question.replies || []).map(reply => {
+                        if (!reply.readByAdmin && reply.senderRole !== 'admin') {
+                            reply.readByAdmin = true;
+                        }
+                        return reply;
+                    });
+
+                    if (!question.readByAdmin) {
+                        await questionRef.update({ readByAdmin: true, replies: updatedReplies });
+                    } else {
+                        await questionRef.update({ replies: updatedReplies });
+                    }
+                } catch (error) {
+                    console.error('خطأ في تحديث القراءة:', error);
+                }
+            }
+
+            async getNotifications() {
                 try {
                     const snapshot = await this.db.collection('notifications')
+                        .where('type', '==', 'admin')
                         .orderBy('timestamp', 'desc')
                         .limit(20)
                         .get();
-                    
-                    return snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        ...doc.data()
-                    }));
+                    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 } catch (error) {
-                    console.error('خطأ في جلب الإشعارات:', error);
                     return [];
                 }
             }
-            
+
             async markAllNotificationsAsRead() {
-                if (!this.db) {
-                    return { success: true };
-                }
-                
                 try {
                     const snapshot = await this.db.collection('notifications')
                         .where('read', '==', false)
+                        .where('type', '==', 'admin')
                         .get();
-                    
                     const batch = this.db.batch();
-                    snapshot.docs.forEach(doc => {
-                        batch.update(doc.ref, { read: true });
-                    });
-                    
+                    snapshot.docs.forEach(doc => batch.update(doc.ref, { read: true }));
                     await batch.commit();
                     return { success: true };
                 } catch (error) {
-                    console.error('خطأ في تحديث جميع الإشعارات:', error);
-                    return { success: false, message: error.message };
+                    return { success: false };
                 }
             }
-            
+
             async getUsersStats() {
-                if (!this.db) {
-                    // بيانات وهمية للاختبار
-                    return {
-                        totalUsers: 15,
-                        activeUsers: 8,
-                        questionsPerUserAvg: 2.3,
-                        userQuestionsCount: { "user1": 5, "user2": 3 }
-                    };
-                }
-                
                 try {
-                    const [usersSnapshot, questionsSnapshot] = await Promise.all([
-                        this.db.collection('users').where('role', '==', 'student').get(),
-                        this.db.collection('questions').get()
-                    ]);
-                    
-                    const users = usersSnapshot.docs.map(doc => ({
-                        id: doc.id,
-                        ...doc.data()
-                    }));
-                    
-                    const questions = questionsSnapshot.docs.map(doc => ({
-                        id: doc.id,
-                        ...doc.data()
-                    }));
-                    
-                    const today = new Date().toISOString().split('T')[0];
-                    const activeUsers = users.filter(user => {
-                        return user.lastLogin && user.lastLogin.split('T')[0] === today;
-                    }).length;
-                    
-                    const questionsPerUserAvg = users.length > 0 ? 
-                        (questions.length / users.length).toFixed(1) : 0;
-                    
+                    const questionsSnapshot = await this.db.collection('questions').get();
+                    const questions = questionsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    const usersMap = {};
                     const userQuestionsCount = {};
-                    questions.forEach(question => {
-                        if (question.userId) {
-                            userQuestionsCount[question.userId] = (userQuestionsCount[question.userId] || 0) + 1;
+
+                    questions.forEach(q => {
+                        if (q.studentId && q.studentName) {
+                            if (!usersMap[q.studentId]) {
+                                usersMap[q.studentId] = {
+                                    id: q.studentId,
+                                    name: q.studentName,
+                                    phone: q.phone || '',
+                                    lastQuestionDate: q.createdAt
+                                };
+                            }
+                            userQuestionsCount[q.studentId] = (userQuestionsCount[q.studentId] || 0) + 1;
                         }
                     });
-                    
-                    return {
-                        totalUsers: users.length,
-                        activeUsers,
-                        questionsPerUserAvg,
-                        userQuestionsCount
-                    };
+
+                    const users = Object.values(usersMap);
+                    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+                    const activeUsers = users.filter(u => {
+                        if (!u.lastQuestionDate) return false;
+                        const d = u.lastQuestionDate?.toDate ? u.lastQuestionDate.toDate() : new Date(u.lastQuestionDate);
+                        return d > sevenDaysAgo;
+                    }).length;
+
+                    const avg = users.length ? (questions.length / users.length).toFixed(1) : 0;
+                    return { totalUsers: users.length, activeUsers, questionsPerUserAvg: avg, users, userQuestionsCount };
                 } catch (error) {
-                    console.error('خطأ في جلب إحصائيات المستخدمين:', error);
-                    return {
-                        totalUsers: 0,
-                        activeUsers: 0,
-                        questionsPerUserAvg: 0,
-                        userQuestionsCount: {}
-                    };
+                    return { totalUsers: 0, activeUsers: 0, questionsPerUserAvg: 0, users: [], userQuestionsCount: {} };
                 }
             }
-            
-            async getAllUsers() {
-                if (!this.db) {
-                    // بيانات وهمية للاختبار
-                    return [
-                        { id: "user1", name: "محمد أحمد", phone: "+966500000001", lastLogin: new Date().toISOString() },
-                        { id: "user2", name: "فاطمة خالد", phone: "+966500000002", lastLogin: new Date(Date.now() - 86400000).toISOString() },
-                        { id: "user3", name: "علي محمود", phone: "+966500000003", lastLogin: new Date(Date.now() - 172800000).toISOString() }
-                    ];
-                }
-                
-                try {
-                    const snapshot = await this.db.collection('users')
-                        .where('role', '==', 'student')
-                        .get();
-                    
-                    return snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        ...doc.data()
-                    }));
-                } catch (error) {
-                    console.error('خطأ في جلب المستخدمين:', error);
-                    return [];
-                }
-            }
-            
+
             setupQuestionsListener(callback) {
-                if (!this.db) {
-                    console.log("⚠️ Firebase غير متصل - لن تعمل التحديثات المباشرة");
-                    return () => {}; // دالة إلغاء فارغة
-                }
-                
-                return this.db.collection('questions')
+                if (!this.db) return () => {};
+                if (this.unsubscribeQuestions) this.unsubscribeQuestions();
+                this.unsubscribeQuestions = this.db.collection('questions')
                     .orderBy('createdAt', 'desc')
                     .onSnapshot(snapshot => {
-                        const questions = snapshot.docs.map(doc => ({
-                            id: doc.id,
-                            ...doc.data()
-                        }));
+                        const questions = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                         callback(questions);
                     });
+                return this.unsubscribeQuestions;
             }
-            
+
             setupNotificationsListener(callback) {
-                if (!this.db) {
-                    return () => {}; // دالة إلغاء فارغة
-                }
-                
-                return this.db.collection('notifications')
+                if (!this.db) return () => {};
+                if (this.unsubscribeNotifications) this.unsubscribeNotifications();
+                this.unsubscribeNotifications = this.db.collection('notifications')
+                    .where('type', '==', 'admin')
                     .orderBy('timestamp', 'desc')
                     .limit(10)
                     .onSnapshot(snapshot => {
-                        const notifications = snapshot.docs.map(doc => ({
-                            id: doc.id,
-                            ...doc.data()
-                        }));
+                        const notifications = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                         callback(notifications);
                     });
+                return this.unsubscribeNotifications;
             }
         }
 
-        const database = new FirebaseDatabase();
+        const adminSystem = new AdminSystem();
         let currentQuestionId = null;
-        let unsubscribeQuestions = null;
-        let unsubscribeNotifications = null;
 
-        // ==================== دوال التطبيق ====================
+        // ==================== دوال الواجهة ====================
         function loadDashboardData() {
-            if (unsubscribeQuestions) unsubscribeQuestions();
-            if (unsubscribeNotifications) unsubscribeNotifications();
-            
-            unsubscribeQuestions = database.setupQuestionsListener(questions => {
-                const pendingCount = questions.filter(q => q.status === 'pending').length;
-                const answeredCount = questions.filter(q => q.status === 'answered').length;
-                const totalCount = questions.length;
-                
-                document.getElementById('pendingCount').textContent = pendingCount;
-                document.getElementById('answeredCount').textContent = answeredCount;
-                document.getElementById('totalCount').textContent = totalCount;
-                
+            if (adminSystem.unsubscribeQuestions) adminSystem.unsubscribeQuestions();
+            if (adminSystem.unsubscribeNotifications) adminSystem.unsubscribeNotifications();
+
+            adminSystem.setupQuestionsListener(questions => {
+                const pending = questions.filter(q => q.status === 'pending').length;
+                const answered = questions.filter(q => q.status === 'answered').length;
+                document.getElementById('pendingCount').textContent = pending;
+                document.getElementById('answeredCount').textContent = answered;
+                document.getElementById('totalCount').textContent = questions.length;
                 renderQuestionsList(questions);
             });
-            
-            unsubscribeNotifications = database.setupNotificationsListener(notifications => {
-                const unreadCount = notifications.filter(n => !n.read).length;
-                updateNotificationsBadge(unreadCount);
+
+            adminSystem.setupNotificationsListener(notifications => {
+                const unread = notifications.filter(n => !n.read).length;
+                updateNotificationsBadge(unread);
                 renderNotificationsDropdown(notifications);
             });
-            
+
             loadUsersData();
         }
-        
+
         function renderQuestionsList(questions) {
-            const questionsList = document.getElementById('questionsList');
-            
+            const list = document.getElementById('questionsList');
             if (questions.length === 0) {
-                questionsList.innerHTML = `
-                    <div style="text-align: center; padding: 50px; color: var(--gray);">
-                        <i class="fas fa-inbox" style="font-size: 60px; margin-bottom: 20px; opacity: 0.5;"></i>
-                        <p style="font-size: 18px;">لا توجد أسئلة حالياً</p>
-                    </div>
-                `;
+                list.innerHTML = `<div style="text-align: center; padding: 50px; color: var(--gray);"><i class="fas fa-inbox" style="font-size:60px; opacity:0.5;"></i><p style="font-size:18px;">لا توجد أسئلة حالياً</p></div>`;
                 return;
             }
-            
-            questionsList.innerHTML = '';
-            
-            questions.forEach(question => {
-                const questionElement = document.createElement('div');
-                questionElement.className = `question-item ${question.status}`;
-                questionElement.dataset.id = question.id;
-                
-                const statusText = question.status === 'pending' ? 'بانتظار الرد' : 'تم الرد';
-                const statusClass = question.status === 'pending' ? 'status-pending' : 'status-answered';
-                const date = new Date(question.createdAt).toLocaleDateString('ar-SA');
-                const time = new Date(question.createdAt).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
-                
-                questionElement.innerHTML = `
+
+            list.innerHTML = '';
+            questions.forEach(q => {
+                const unreadCount = (q.replies || []).filter(r => !r.readByAdmin && r.senderRole !== 'admin').length;
+                const date = q.createdAt?.toDate ? q.createdAt.toDate() : new Date(q.createdAt || 0);
+                const dateStr = date.toLocaleDateString('ar-SA');
+                const timeStr = date.toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
+                const statusText = q.status === 'pending' ? 'بانتظار الرد' : 'تم الرد';
+                const statusClass = q.status === 'pending' ? 'status-pending' : 'status-answered';
+
+                const item = document.createElement('div');
+                item.className = `question-item ${q.status}`;
+                item.dataset.id = q.id;
+                item.innerHTML = `
+                    ${unreadCount > 0 ? `<div class="unread-badge">${unreadCount}</div>` : ''}
                     <div class="question-content">
-                        <div class="question-title">
-                            ${question.title ? question.title : 'بدون عنوان'}
-                            ${question.status === 'pending' ? '<i class="fas fa-clock" style="color: #ff9f43;"></i>' : '<i class="fas fa-check-circle" style="color: var(--secondary);"></i>'}
-                        </div>
+                        <div class="question-title">${q.title || 'بدون عنوان'}</div>
                         <div class="question-meta">
-                            <span><i class="fas fa-user"></i> ${question.userName}</span>
-                            <span><i class="fas fa-book"></i> ${question.subject}</span>
-                            <span><i class="fas fa-calendar"></i> ${date}</span>
-                            <span><i class="fas fa-clock"></i> ${time}</span>
+                            <span><i class="fas fa-user"></i> ${q.studentName || 'مجهول'}</span>
+                            ${q.phone ? `<span><a href="${adminSystem.createWhatsappLink(q.phone)}" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i> ${q.phone}</a></span>` : ''}
+                            <span><i class="fas fa-calendar"></i> ${dateStr}</span>
+                            <span><i class="fas fa-clock"></i> ${timeStr}</span>
+                            <span><i class="fas fa-comment"></i> ${(q.replies || []).length}</span>
                         </div>
                     </div>
                     <div class="question-status ${statusClass}">${statusText}</div>
                 `;
-                
-                questionElement.addEventListener('click', () => {
-                    openQuestionModal(question.id);
-                });
-                
-                questionsList.appendChild(questionElement);
+                item.addEventListener('click', () => openQuestionModal(q.id));
+                list.appendChild(item);
             });
         }
-        
+
         async function openQuestionModal(questionId) {
-            const question = await database.getQuestionById(questionId);
+            const question = await adminSystem.getQuestionById(questionId);
             if (!question) return;
-            
             currentQuestionId = questionId;
-            
-            document.getElementById('modalName').textContent = question.userName || 'غير محدد';
-            document.getElementById('modalSubject').textContent = question.subject || 'غير محدد';
-            document.getElementById('modalWhatsapp').textContent = question.userPhone || 'لم يضف رقم واتساب';
-            
-            const date = new Date(question.createdAt);
-            const formattedDate = date.toLocaleDateString('ar-SA', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                weekday: 'long'
-            });
-            const formattedTime = date.toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
-            
-            document.getElementById('modalDate').textContent = `${formattedDate} - ${formattedTime}`;
+            adminSystem.currentQuestionId = questionId;
+
+            document.getElementById('modalName').textContent = question.studentName || '-';
+            const whatsappEl = document.getElementById('modalWhatsapp');
+            if (question.phone) {
+                const link = adminSystem.createWhatsappLink(question.phone);
+                whatsappEl.innerHTML = `<a href="${link}" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i> ${question.phone}</a>`;
+            } else {
+                whatsappEl.textContent = 'لم يضف رقم';
+            }
+            document.getElementById('modalStatus').textContent = question.status === 'pending' ? 'بانتظار الرد' : 'تم الرد';
+            const date = question.createdAt?.toDate ? question.createdAt.toDate() : new Date(question.createdAt || 0);
+            document.getElementById('modalDate').textContent = `${date.toLocaleDateString('ar-SA')} - ${date.toLocaleTimeString('ar-SA', { hour:'2-digit', minute:'2-digit' })}`;
             document.getElementById('modalTitle').textContent = question.title || 'بدون عنوان';
-            document.getElementById('modalQuestion').textContent = question.question || 'لا يوجد نص للسؤال';
-            document.getElementById('answerText').value = question.answer || '';
-            
+            document.getElementById('modalQuestion').textContent = question.question;
+
+            renderReplies(question.replies || []);
+            await adminSystem.markRepliesAsReadByAdmin(questionId);
+
             document.getElementById('questionModal').classList.add('show');
         }
-        
+
+        function renderReplies(replies) {
+            const container = document.getElementById('repliesContainer');
+            if (!replies || replies.length === 0) {
+                container.innerHTML = `<p style="color: var(--gray); text-align: center;">لا توجد ردود بعد</p>`;
+                return;
+            }
+            container.innerHTML = '';
+            replies.sort((a,b) => {
+                const ta = a.timestamp?.toDate ? a.timestamp.toDate() : new Date(a.timestamp || 0);
+                const tb = b.timestamp?.toDate ? b.timestamp.toDate() : new Date(b.timestamp || 0);
+                return ta - tb;
+            }).forEach(reply => {
+                const div = document.createElement('div');
+                div.className = 'reply-item';
+                const d = reply.timestamp?.toDate ? reply.timestamp.toDate() : new Date(reply.timestamp || 0);
+                const time = d.toLocaleTimeString('ar-SA', { hour:'2-digit', minute:'2-digit' });
+                const date = d.toLocaleDateString('ar-SA');
+                const sender = reply.senderRole === 'admin' ? 'المشرف' : reply.senderName;
+                const icon = reply.senderRole === 'admin' ? 'fa-user-tie' : 'fa-user-graduate';
+                div.innerHTML = `
+                    <div class="reply-header">
+                        <span class="reply-sender"><i class="fas ${icon}"></i> ${sender}</span>
+                        <span class="reply-time">${date} - ${time}</span>
+                    </div>
+                    <div class="reply-content">${reply.content}</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        async function sendReply() {
+            const input = document.getElementById('replyInput');
+            const content = input.value.trim();
+            if (!content || !currentQuestionId) return;
+
+            const btn = document.getElementById('sendReplyBtn');
+            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري...';
+
+            const result = await adminSystem.addReply(currentQuestionId, content);
+            if (result.success) {
+                input.value = '';
+            } else {
+                alert('خطأ: ' + result.message);
+            }
+
+            btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
+        }
+
         function updateNotificationsBadge(count) {
             const badge = document.getElementById('notificationBadge');
-            
             if (count > 0) {
                 badge.style.display = 'flex';
                 badge.textContent = count > 9 ? '9+' : count;
@@ -1592,386 +1521,185 @@
                 badge.style.display = 'none';
             }
         }
-        
+
         function renderNotificationsDropdown(notifications) {
             const dropdown = document.getElementById('notificationsDropdown');
-            
             if (notifications.length === 0) {
-                dropdown.innerHTML = `
-                    <div class="notification-item" style="text-align: center; color: var(--gray);">
-                        <i class="fas fa-bell-slash" style="font-size: 30px; margin-bottom: 15px; opacity: 0.5;"></i>
-                        <p>لا توجد إشعارات حالياً</p>
-                    </div>
-                `;
+                dropdown.innerHTML = `<div class="notification-item" style="text-align: center;"><i class="fas fa-bell-slash" style="font-size:30px; opacity:0.5;"></i><p>لا توجد إشعارات</p></div>`;
                 return;
             }
-            
             dropdown.innerHTML = '';
-            
-            notifications.forEach(notification => {
-                const notificationElement = document.createElement('div');
-                notificationElement.className = `notification-item ${notification.read ? '' : 'unread'}`;
-                notificationElement.dataset.id = notification.id;
-                
-                const time = new Date(notification.timestamp);
-                const timeString = time.toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
-                const dateString = time.toLocaleDateString('ar-SA', { month: 'short', day: 'numeric' });
-                
-                notificationElement.innerHTML = `
-                    <div class="notification-title">
-                        ${notification.title}
-                        <span class="notification-time">${dateString} - ${timeString}</span>
-                    </div>
-                    <div class="notification-message">${notification.message}</div>
+            notifications.forEach(n => {
+                const item = document.createElement('div');
+                item.className = `notification-item ${n.read ? '' : 'unread'}`;
+                const time = n.timestamp?.toDate ? n.timestamp.toDate() : new Date(n.timestamp || 0);
+                const timeStr = time.toLocaleTimeString('ar-SA', { hour:'2-digit', minute:'2-digit' });
+                const dateStr = time.toLocaleDateString('ar-SA', { month:'short', day:'numeric' });
+                item.innerHTML = `
+                    <div class="notification-title">${n.title}<span class="notification-time">${dateStr} - ${timeStr}</span></div>
+                    <div class="notification-message">${n.message}</div>
                 `;
-                
-                notificationElement.addEventListener('click', async () => {
-                    await database.markAllNotificationsAsRead();
-                    
-                    if (notification.title.includes('سؤال')) {
-                        document.getElementById('questionsList').scrollIntoView({ behavior: 'smooth' });
-                    }
+                item.addEventListener('click', async () => {
+                    await adminSystem.markAllNotificationsAsRead();
+                    if (n.questionId) openQuestionModal(n.questionId);
                 });
-                
-                dropdown.appendChild(notificationElement);
+                dropdown.appendChild(item);
             });
-            
-            const clearAll = document.createElement('div');
-            clearAll.className = 'notification-item';
-            clearAll.style.textAlign = 'center';
-            clearAll.style.padding = '15px';
-            clearAll.innerHTML = '<button id="clearNotificationsBtn" style="background: none; border: none; color: var(--accent); cursor: pointer; font-weight: 700; font-size: 15px;">حذف جميع الإشعارات</button>';
-            clearAll.querySelector('#clearNotificationsBtn').addEventListener('click', async (e) => {
+            const clear = document.createElement('div');
+            clear.className = 'notification-item';
+            clear.style.textAlign = 'center';
+            clear.innerHTML = '<button id="clearNotificationsBtn" style="background:none; border:none; color:var(--accent); font-weight:700;">حذف جميع الإشعارات</button>';
+            clear.querySelector('#clearNotificationsBtn').addEventListener('click', async (e) => {
                 e.stopPropagation();
-                await database.markAllNotificationsAsRead();
+                await adminSystem.markAllNotificationsAsRead();
             });
-            
-            dropdown.appendChild(clearAll);
+            dropdown.appendChild(clear);
         }
-        
+
         async function loadUsersData() {
-            const stats = await database.getUsersStats();
-            const users = await database.getAllUsers();
-            
+            const stats = await adminSystem.getUsersStats();
             document.getElementById('totalUsersCount').textContent = stats.totalUsers;
             document.getElementById('activeUsersCount').textContent = stats.activeUsers;
             document.getElementById('questionsPerUserAvg').textContent = stats.questionsPerUserAvg;
-            
-            const usersTableBody = document.getElementById('usersTableBody');
-            
-            if (users.length === 0) {
-                usersTableBody.innerHTML = `
-                    <tr>
-                        <td colspan="4" style="text-align: center; padding: 50px; color: var(--gray);">
-                            <i class="fas fa-user-slash" style="font-size: 60px; margin-bottom: 20px; opacity: 0.5;"></i>
-                            <p style="font-size: 18px;">لا يوجد مستخدمين مسجلين بعد</p>
-                        </td>
-                    </tr>
-                `;
+
+            const tbody = document.getElementById('usersTableBody');
+            if (stats.users.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 50px;"><i class="fas fa-user-slash" style="font-size:60px; opacity:0.5;"></i><p>لا يوجد مستخدمين</p></td></tr>`;
                 return;
             }
-            
-            usersTableBody.innerHTML = '';
-            
-            const sortedUsers = [...users].sort((a, b) => {
-                const dateA = a.lastLogin ? new Date(a.lastLogin) : new Date(0);
-                const dateB = b.lastLogin ? new Date(b.lastLogin) : new Date(0);
-                return dateB - dateA;
-            });
-            
-            sortedUsers.forEach(user => {
-                const userQuestions = stats.userQuestionsCount[user.id] || 0;
-                const lastLogin = user.lastLogin ? 
-                    new Date(user.lastLogin).toLocaleDateString('ar-SA') + ' ' + 
-                    new Date(user.lastLogin).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }) : 
-                    'لم يسجل دخول';
-                
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td style="font-weight: 700; color: var(--dark);">${user.name}</td>
-                    <td style="text-align: center; color: var(--gray);">${user.phone || 'لا يوجد'}</td>
-                    <td style="text-align: center;">
-                        <span class="question-count-badge">${userQuestions}</span>
-                    </td>
-                    <td style="text-align: center; color: var(--gray); font-size: 15px;">${lastLogin}</td>
-                `;
-                
-                usersTableBody.appendChild(row);
+
+            tbody.innerHTML = '';
+            stats.users.sort((a,b) => {
+                const da = a.lastQuestionDate?.toDate ? a.lastQuestionDate.toDate() : new Date(a.lastQuestionDate || 0);
+                const db = b.lastQuestionDate?.toDate ? b.lastQuestionDate.toDate() : new Date(b.lastQuestionDate || 0);
+                return db - da;
+            }).forEach(u => {
+                const count = stats.userQuestionsCount[u.id] || 0;
+                const last = u.lastQuestionDate ? new Date(u.lastQuestionDate?.toDate ? u.lastQuestionDate.toDate() : u.lastQuestionDate) : null;
+                const lastStr = last ? last.toLocaleDateString('ar-SA') + ' ' + last.toLocaleTimeString('ar-SA', { hour:'2-digit', minute:'2-digit' }) : 'لا يوجد';
+                const phoneLink = u.phone ? `<a href="${adminSystem.createWhatsappLink(u.phone)}" target="_blank" style="color:#25D366;"><i class="fab fa-whatsapp"></i> ${u.phone}</a>` : 'لا يوجد';
+                tbody.innerHTML += `<tr><td style="font-weight:700;">${u.name}</td><td style="text-align:center;">${phoneLink}</td><td style="text-align:center;"><span class="question-count-badge">${count}</span></td><td style="text-align:center; color:var(--gray);">${lastStr}</td></tr>`;
             });
         }
 
         // ==================== تهيئة الصفحة ====================
         document.addEventListener('DOMContentLoaded', function() {
-            console.log("✅ الصفحة تم تحميلها بنجاح");
-            
-            // التحقق من وجود جلسة دخول سابقة
             const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
             if (isLoggedIn) {
                 document.getElementById('loginContainer').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
-                document.getElementById('adminName').textContent = 'مرحباً، المشرف';
                 loadDashboardData();
             }
-            
-            // تهيئة حقول إدخال الرمز
-            const digitInputs = [
-                document.getElementById('digit1'),
-                document.getElementById('digit2'),
-                document.getElementById('digit3'),
-                document.getElementById('digit4')
-            ];
-            
-            // التنقل بين حقول إدخال الرمز
-            digitInputs.forEach((input, index) => {
+
+            // PIN inputs
+            const digits = ['digit1','digit2','digit3','digit4'].map(id => document.getElementById(id));
+            digits.forEach((input, i) => {
                 input.addEventListener('input', (e) => {
-                    const value = e.target.value;
-                    
-                    // التحقق من أن المدخل رقم فقط
-                    if (!/^\d$/.test(value) && value !== '') {
-                        e.target.value = '';
-                        return;
-                    }
-                    
-                    if (value.length === 1 && index < digitInputs.length - 1) {
-                        digitInputs[index + 1].focus();
-                    }
-                    
-                    // تحديث حالة الحقل
-                    digitInputs.forEach((digit, i) => {
-                        if (digit.value) {
-                            digit.classList.add('filled');
-                            digit.classList.remove('error');
-                        } else {
-                            digit.classList.remove('filled');
-                        }
-                    });
-                    
-                    // إخفاء رسالة الخطأ عند البدء في الكتابة
+                    if (!/^\d$/.test(e.target.value) && e.target.value !== '') { e.target.value = ''; return; }
+                    if (e.target.value.length === 1 && i < 3) digits[i+1].focus();
+                    digits.forEach(d => d.classList.toggle('filled', !!d.value));
                     document.getElementById('pinError').style.display = 'none';
                 });
-                
                 input.addEventListener('keydown', (e) => {
-                    // مسح الحقل عند الضغط على Backspace إذا كان فارغاً
-                    if (e.key === 'Backspace' && !input.value && index > 0) {
-                        digitInputs[index - 1].focus();
-                        digitInputs[index - 1].value = '';
-                        digitInputs[index - 1].classList.remove('filled');
+                    if (e.key === 'Backspace' && !input.value && i > 0) {
+                        digits[i-1].focus(); digits[i-1].value = ''; digits[i-1].classList.remove('filled');
                     }
-                    
-                    // السماح فقط بالأرقام وبعض مفاتيح التنقل
-                    if (!/^\d$/.test(e.key) && 
-                        !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
-                        e.preventDefault();
-                    }
-                    
-                    // الدخول بالضغط على Enter عند الحقل الأخير
-                    if (e.key === 'Enter' && index === digitInputs.length - 1 && input.value) {
-                        document.getElementById('loginBtn').click();
-                    }
-                });
-                
-                input.addEventListener('focus', () => {
-                    input.select();
+                    if (!/^\d$/.test(e.key) && !['Backspace','Delete','ArrowLeft','ArrowRight','Tab'].includes(e.key)) e.preventDefault();
+                    if (e.key === 'Enter' && i === 3 && input.value) document.getElementById('loginBtn').click();
                 });
             });
-            
-            // زر الدخول
-            const loginBtn = document.getElementById('loginBtn');
-            loginBtn.addEventListener('click', function() {
-                const enteredPin = digitInputs.map(input => input.value).join('');
-                const pinError = document.getElementById('pinError');
-                
-                // إخفاء رسالة الخطأ
-                pinError.style.display = 'none';
-                
-                // إزالة تأثير الخطأ من جميع الحقول
-                digitInputs.forEach(input => input.classList.remove('error'));
-                
-                // التحقق من أن جميع الحقول ممتلئة
-                if (enteredPin.length < 4) {
-                    pinError.textContent = 'الرجاء إدخال جميع الأرقام';
-                    pinError.style.display = 'block';
-                    digitInputs.forEach(input => {
-                        if (!input.value) {
-                            input.classList.add('error');
-                        }
-                    });
-                    digitInputs[0].focus();
+
+            // Login
+            document.getElementById('loginBtn').addEventListener('click', function() {
+                const pin = digits.map(d => d.value).join('');
+                const error = document.getElementById('pinError');
+                digits.forEach(d => d.classList.remove('error'));
+                if (pin.length < 4) {
+                    error.textContent = 'الرجاء إدخال جميع الأرقام';
+                    error.style.display = 'block';
+                    digits.forEach(d => { if (!d.value) d.classList.add('error'); });
+                    digits[0].focus();
                     return;
                 }
-                
-                // التحقق من صحة الرمز
-                if (enteredPin === ADMIN_PIN) {
-                    // حفظ حالة الدخول
+                if (pin === ADMIN_PIN) {
                     localStorage.setItem('adminLoggedIn', 'true');
-                    
-                    // إخفاء واجهة الدخول وإظهار لوحة التحكم
                     document.getElementById('loginContainer').style.display = 'none';
                     document.getElementById('dashboard').style.display = 'block';
-                    document.getElementById('adminName').textContent = 'مرحباً، المشرف';
-                    
-                    // تحميل البيانات
                     loadDashboardData();
-                    
-                    // إعادة تعيين حقول الرمز
-                    digitInputs.forEach(input => {
-                        input.value = '';
-                        input.classList.remove('filled');
-                    });
-                    
-                    console.log("✅ تم الدخول بنجاح!");
+                    digits.forEach(d => { d.value = ''; d.classList.remove('filled'); });
                 } else {
-                    // عرض رسالة الخطأ
-                    pinError.textContent = 'رمز الدخول غير صحيح';
-                    pinError.style.display = 'block';
-                    
-                    // إضافة تأثير الخطأ على جميع الحقول
-                    digitInputs.forEach(input => input.classList.add('error'));
-                    
-                    // التركيز على الحقل الأول
-                    digitInputs[0].focus();
-                    digitInputs[0].select();
-                    
-                    console.log("❌ رمز الدخول غير صحيح");
+                    error.textContent = 'رمز الدخول غير صحيح';
+                    error.style.display = 'block';
+                    digits.forEach(d => d.classList.add('error'));
+                    digits[0].focus();
                 }
             });
-            
-            // زر تسجيل الخروج
+
+            // Logout
             document.getElementById('logoutBtn').addEventListener('click', function() {
-                if (unsubscribeQuestions) unsubscribeQuestions();
-                if (unsubscribeNotifications) unsubscribeNotifications();
-                
-                // حذف حالة الدخول
+                if (adminSystem.unsubscribeQuestions) adminSystem.unsubscribeQuestions();
+                if (adminSystem.unsubscribeNotifications) adminSystem.unsubscribeNotifications();
                 localStorage.removeItem('adminLoggedIn');
-                
-                // إخفاء لوحة التحكم وإظهار واجهة الدخول
                 document.getElementById('dashboard').style.display = 'none';
                 document.getElementById('loginContainer').style.display = 'flex';
-                
-                // إعادة تعيين حقول الرمز
-                digitInputs.forEach(input => {
-                    input.value = '';
-                    input.classList.remove('filled', 'error');
-                });
-                
-                // إخفاء رسالة الخطأ
+                digits.forEach(d => { d.value = ''; d.classList.remove('filled','error'); });
                 document.getElementById('pinError').style.display = 'none';
-                
-                // التركيز على الحقل الأول
-                setTimeout(() => {
-                    digitInputs[0].focus();
-                }, 100);
-                
-                console.log("✅ تم تسجيل الخروج");
+                digits[0].focus();
             });
-            
-            // إغلاق نافذة السؤال
+
+            // Modal close
             document.getElementById('closeModal').addEventListener('click', () => {
                 document.getElementById('questionModal').classList.remove('show');
                 currentQuestionId = null;
+                adminSystem.currentQuestionId = null;
             });
-            
             document.getElementById('questionModal').addEventListener('click', (e) => {
                 if (e.target === document.getElementById('questionModal')) {
-                    document.getElementById('questionModal').classList.remove('show');
+                    e.target.classList.remove('show');
                     currentQuestionId = null;
+                    adminSystem.currentQuestionId = null;
                 }
             });
-            
-            // إرسال الإجابة
-            document.getElementById('sendAnswerBtn').addEventListener('click', async function() {
-                const answerText = document.getElementById('answerText').value.trim();
-                
-                if (!answerText) {
-                    alert('الرجاء كتابة الإجابة قبل الإرسال');
-                    return;
-                }
-                
-                if (!currentQuestionId) return;
-                
-                const sendBtn = document.getElementById('sendAnswerBtn');
-                const originalText = sendBtn.innerHTML;
-                
-                sendBtn.disabled = true;
-                sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
-                
-                const result = await database.updateQuestion(currentQuestionId, {
-                    answer: answerText,
-                    status: 'answered'
-                });
-                
-                if (result.success) {
-                    alert('تم إرسال الإجابة بنجاح');
-                    
-                    setTimeout(() => {
-                        document.getElementById('questionModal').classList.remove('show');
-                        currentQuestionId = null;
-                    }, 1000);
-                } else {
-                    alert('حدث خطأ أثناء حفظ الإجابة: ' + result.message);
-                }
-                
-                sendBtn.disabled = false;
-                sendBtn.innerHTML = originalText;
-            });
-            
-            // حذف السؤال
+
+            // Delete question
             document.getElementById('deleteQuestionBtn').addEventListener('click', async function() {
                 if (!currentQuestionId) return;
-                
-                const confirmation = confirm('هل أنت متأكد من حذف هذا السؤال؟ لا يمكن التراجع عن هذه العملية.');
-                
-                if (confirmation) {
-                    const result = await database.deleteQuestion(currentQuestionId);
-                    
-                    if (result.success) {
-                        alert('تم حذف السؤال بنجاح');
+                if (confirm('هل أنت متأكد من حذف هذا السؤال؟')) {
+                    const res = await adminSystem.deleteQuestion(currentQuestionId);
+                    if (res.success) {
                         document.getElementById('questionModal').classList.remove('show');
                         currentQuestionId = null;
                     } else {
-                        alert('حدث خطأ أثناء حذف السؤال: ' + result.message);
+                        alert('خطأ في الحذف');
                     }
                 }
             });
-            
-            // عرض/إخفاء الإشعارات
+
+            // Send reply
+            document.getElementById('sendReplyBtn').addEventListener('click', sendReply);
+            document.getElementById('replyInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') { e.preventDefault(); sendReply(); }
+            });
+
+            // Notifications toggle
             document.getElementById('notificationsContainer').addEventListener('click', function(e) {
                 if (e.target.closest('.fa-bell') || e.target.closest('.notification-badge')) {
-                    const dropdown = document.getElementById('notificationsDropdown');
-                    dropdown.classList.toggle('show');
-                    
-                    if (dropdown.classList.contains('show')) {
-                        database.markAllNotificationsAsRead();
-                    }
+                    const dd = document.getElementById('notificationsDropdown');
+                    dd.classList.toggle('show');
+                    if (dd.classList.contains('show')) adminSystem.markAllNotificationsAsRead();
                 }
             });
-            
-            // إغلاق قائمة الإشعارات عند النقر خارجها
             document.addEventListener('click', function(e) {
-                const dropdown = document.getElementById('notificationsDropdown');
-                const container = document.getElementById('notificationsContainer');
-                
-                if (!container.contains(e.target) && dropdown.classList.contains('show')) {
-                    dropdown.classList.remove('show');
-                }
+                const dd = document.getElementById('notificationsDropdown');
+                const c = document.getElementById('notificationsContainer');
+                if (!c.contains(e.target) && dd.classList.contains('show')) dd.classList.remove('show');
             });
-            
-            // تحديث بيانات المستخدمين
+
+            // Refresh users
             document.getElementById('refreshUsersBtn').addEventListener('click', loadUsersData);
-            
-            // التركيز على الحقل الأول عند تحميل الصفحة
-            setTimeout(() => {
-                if (!localStorage.getItem('adminLoggedIn')) {
-                    digitInputs[0].focus();
-                }
-            }, 500);
-            
-            // رسالة ترحيب
-            setTimeout(() => {
-                if (!localStorage.getItem('adminLoggedIn')) {
-                    console.log("🔐 نظام الدخول جاهز. استخدم الرمز: 1234");
-                }
-            }, 1000);
+
+            // Auto focus first PIN
+            if (!localStorage.getItem('adminLoggedIn')) setTimeout(() => digits[0]?.focus(), 500);
         });
     </script>
 </body>
